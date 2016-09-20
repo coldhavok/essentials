@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'icon-with-text',
-  template: `<div class="iconWithText"><img [src]="icon">{{ text }}</div>`,
+  template: `<div class="iconWithText">
+               <img [src]="icon" [alt]="texxt">
+               <ng-content></ng-content>
+             </div>`,
   styles: [ `.iconWithText {
                width: 64px;
                display: flex;
@@ -17,4 +20,6 @@ import { Component } from '@angular/core';
              }` ]
 })
 export class IconWithTextComponent {
+  @Input() icon: string;
+  @Input() text: string;
 }

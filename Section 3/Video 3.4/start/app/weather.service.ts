@@ -13,6 +13,25 @@ export class Weather {
   }
 
   fortWorth () {
-    return new Observable(observer => { });
+    return new Observable(observer => {
+      // At this point we could look in localStorage for a cached set of data
+      // and use that to generate an event immediately.
+      observer.next({
+        date: "Fri, 07 Aug 2015 3:52 pm CST",
+        temp: "105",
+        text: "Clear"
+      });
+
+      let httpObservable = this.http.get(this.query)
+        .map(res => res.json().query.results.channel.item.condition);
+
+      // At this point, instead of logging out the returned value, we could
+      // store it in localStorage for later retrieval.
+      httpObservable.subscribe(res => console.log(res));
+
+      // This is the subscription that emits the second event which updates the
+      // UI with current information.
+      httpObservable.subscribe(res => observer.next(res));
+    });
   }
 }
