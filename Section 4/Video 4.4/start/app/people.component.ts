@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Users } from './users.service';
 
@@ -13,4 +14,14 @@ import { Users } from './users.service';
 })
 export class PeopleComponent {
   user = { };
+
+  constructor(private route: ActivatedRoute, private users: Users) {
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      let id = parseInt(params['id'], 10);
+      this.users.user(id).subscribe(user => { this.user = user.data; });
+    });
+  }
 }

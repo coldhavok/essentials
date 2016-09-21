@@ -1,3 +1,4 @@
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Component, provide } from '@angular/core';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { bootstrap } from '@angular/platform-browser-dynamic';
@@ -30,5 +31,6 @@ export class AppComponent {
 bootstrap(AppComponent, [
   provide(Users, { useClass: UsersHttp }),
   HTTP_PROVIDERS,
-  APP_ROUTER_PROVIDERS
+  APP_ROUTER_PROVIDERS,
+  { provide: LocationStrategy, useClass: HashLocationStrategy }
 ]).catch(err => console.error(err));

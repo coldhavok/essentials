@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-
 export class Users {
   pageList = [];
   users = null;
@@ -14,9 +12,9 @@ export class Users {
     return this.users.data;
   }
 
-  user (id) : Observable<any> {
-    return Observable.of({ });
-  }
+    user (id) {
+        return { };
+    }
 
   pages() {
     return this.pageList;
@@ -44,9 +42,9 @@ export class UsersHttp extends Users {
     this.page(1);
   }
 
-  user (id) : Observable<any> {
-    return this.http.get(`http://reqres.in/api/users/${id}`).map(res => res.json());
-  }
+    user (id) {
+        return this.http.get(`http://reqres.in/api/users/${id}`).map(res => res.json());
+    }
 
   page(pageNumber) {
     // Call map on the response observable to get the parsed people object
